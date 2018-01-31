@@ -1,0 +1,26 @@
+Retail,Asia mall Gift Voucher,$20 Voucher,1410,asiamall.png,150,80,Asia mall $20 Gift Voucher
+Retail,Best Denki Voucher,$50 Voucher,2640,bestdenki.jpg,160,50,Best Denki $50 Voucher
+Retail,Capita Voucher,$20 Voucher,1410,capitaland.jpg,160,80,Capita $20 Voucher
+Retail,Charles & Keith Voucher,$20 Voucher,1300,charlesandkeith.jpg,180,120,Charles & Keith $20 Voucher
+Retail,Club 21 Voucher,$50 Voucher,2100,club2.jpg,80,80,Club 21 $50 Voucher
+Retail,Courts Voucher,$20 Voucher,1025,court.jpg,160,60,Courts $20 Voucher
+Retail,Gain City Voucher,$50 Voucher,2075,gaincity.png,180,70,Gain City $50 Voucher
+Retail,Isetan Voucher,$20 Voucher,1000,isetan.jpg,140,75,Isetan $20 Voucher
+Retail,Nike Voucher,$50 Voucher,1625,nike.png,120,90,Nike $50 Voucher
+Retail,Popular Voucher,$20 Voucher,1000,popular.jpg,180,80,Popular $20 Voucher
+Retail,Pull & Bear Voucher,$30 Voucher,1325,pullandbear.jpg,200,120,Pull & Bear $30 Voucher
+Dining,Andersens of Denmark Voucher,$10 Voucher,700,andersenicecream.png,180,50,Andersens of Denmark $10 Voucher
+Dining,Bakerzin Voucher,$10 Voucher,700,bazerzin.png,160,40,Bakerzin $10 Voucher
+Dining,Breadtalk Voucher,$10 Voucher,700,breadtalk.png,160,60,Breadtalk $10 Voucher
+Dining,Din Tai Fung Voucher,$20 Voucher,1930,dintaifung.jpg,170,80,Din Tai Fung $20 Voucher
+Dining,Maki-San Voucher,$20 Voucher,1300,makisan.jpg,110,110,Maki-San $20 Voucher
+Dining,O Coffee Club Voucher,$20 Voucher,1300,ocoffeeclub.jpg,200,100,O Coffee Club $20 Voucher
+Dining,Paradise Group Voucher,$50 Voucher,2700,paradisegroup.jpg,180,80,Paradise Group $50 Voucher
+Dining,Polar Puffs and Cakes Voucher,$20 Voucher,1600,polar.jpg,170,70,Polar Puffs and Cakes $20 Voucher
+Dining,Swensen's Voucher,$20 Voucher,1300,swensens.png,160,50,Swensen's $20 Voucher
+Dining,TungLok Group Voucher,$20 Voucher,1300,tunglok.jpg,150,80,TungLok Group $20 Voucher
+Leisure,BBounce Studio Voucher,$20 Voucher,1000,bbounce.png,120,90,BBounce Studio $20 Voucher
+Leisure,Freeing SG Voucher,$20 Voucher,1000,freeingsg.png,180,100,Freeing SG $20 Voucher
+Leisure,Saint Games Voucher,$10 Voucher,500,saintgames.jpg,160,120,Saint Games $10 Voucher
+Leisure,Shaw Theatre Tickets,2 Movie Ticket,1420,shawtheatres.png,150,100,Shaw Theatre 2 Movie Ticket
+Leisure,Spa Infinity Voucher,$20 Voucher,1000,spaInfinity.jpg,180,95,Spa Infinity $20 Voucher

@@ -1,0 +1,16 @@
+Rubbish,03/12/2017,UOB Platinum Card,9888-6121-0824-1112,Bakerzin $10 Voucher,3,UNI$2100
+Rubbish,03/12/2017,OCBC Platinum Mastercard,2342-3981-7652-0918,NTUC Fairprice $20 Voucher,3,10500 OCBC$
+Rubbish,12/12/2017,UOB Platinum Card,9888-6121-0824-1112,Courts $20 Voucher,3,UNI$2175
+Rubbish,21/12/2017,DBS Black Card,7381-3191-7122-0333,Best Denki $50 Voucher,1,3400 DBS Points
+Z,27/12/2017,UOB Platinum Card,8888-6121-0824-1112,Swensen's $20 Voucher,2,UNI$2600
+Rubbish,30/12/2017,UOB Platinum Card,9888-6121-0824-1112,Courts $20 Voucher,4,UNI$2175
+Rubbish,30/12/2017,UOB Platinum Card,7612-9990-7631-8978,Capita $20 Voucher,2,UNI$2820
+Rubbish,07/01/2018,UOB Platinum Card,9888-6121-0824-1112,Nike $50 Voucher,1,UNI$1625
+Rubbish,23/01/2018,UOB Platinum Card,9888-6121-0824-1112,Pull & Bear $30 Voucher,1,UNI$1325
+Z,07/01/2018,UOB Platinum Card,8888-6121-0824-1112,Andersens of Denmark $10 Voucher,5,UNI$3500
+Z,07/01/2018,UOB Platinum Card,8888-6121-0824-1112,Andersens of Denmark $10 Voucher,5,UNI$3500
+Rubbish,09/01/2018,DBS Black Card,9766-2222-1111-1331,Charles & Keith $20 Voucher,1,1450 DBS Points
+Rubbish,09/01/2018,DBS Black Card,9766-2222-1111-1331,Best Denki $50 Voucher,1,3400 DBS Points
+Rubbish,23/01/2018,OCBC Platinum Mastercard,2342-3981-7652-0918,Metro $20 Voucher,2,7800 OCBC$
+Rubbish,30/01/2018,UOB Platinum Card,9888-6121-0824-1112,Asia mall $20 Gift Voucher,2,UNI$2820
+Rubbish,31/01/2018,DBS Black Card,7381-3191-7122-0333,Andersens of Denmark $10 Voucher,2,1200 DBS Points

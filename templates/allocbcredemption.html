@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+tr{
+    font-size:15px;
+}
+
+th.text-center {
+    border: 1px solid black;
+    font-size:15px;
+}
+tr.border_bottom td {
+    border-bottom:1pt solid black;
+    height:100px;
+    font-family:Calibri;
+}
+#rhcardparticulars{
+    text-align:left;
+    padding-left:30px;
+}
+
+.filterbank{
+    margin: 0px 100px 20px 400px;
+    font-family:Calibri;
+}
+.filtermonth{
+    margin: 0px 140px 20px 100px;
+    font-family:Calibri;
+}
+</style>
+
+    <h1 style="text-align:center; font-size:23px; font-family:Century Gothic;"> Redemption History</h1>
+
+    <br>
+    <br>
+    <div class="filterbank" style="font-size:18px; font-family:Calibri;display:inline-block;">
+        <label for="rhbank">Bank:</label>
+        <select id="rhsort" onchange="location = this.value;" >
+            <option name="ALL" value="/allredemption" >All</option>
+            <option name="UOB" value="/alluobredemption">UOB</option>
+            <option name="OCBC" value="/allocbcredemption" selected="selected">OCBC</option>
+            <option name="DBS" value="/alldbsredemption">DBS</option>
+        </select>
+
+    </div>
+    <div class="filtermonth" style="font-size:18px; font-family:Calibri;display:inline-block;">
+           <label for="rhmonth">Month:</label>
+        <select id="rhmonth" onchange="location = this.value;">
+            <option name="All" value="/allocbcredemption" selected="selected">All</option>
+            <option name="December 2017" value="/ocbcdecdecredemption">December 2017</option>
+            <option name="January 2018" value="/ocbcjandecredemption" >January 2018</option>
+            <option name="February 2018" value="/ocbcfebdecredemption">February 2018</option>
+        </select>
+    </div>
+    <table class="allocbchistory" style="border:1px solid black; width:95%;text-align:center; margin:auto;">
+
+        <tr class="border_bottom"  style="height:100px;">
+             <th class="text-center" class="rhdate">Date</th>
+             <th class="text-center" class="rhcardparticulars">Card Particulars</th>
+             <th class="text-center" class="rhitem">Reward Item</th>
+             <th class="text-center" class="rhqty">Quantity</th>
+             <th class="text-center" class="rhpointsredeemed">Points Redeemed</th>
+       </tr>
+        {% if allocbcredemptions %}
+        {% for redemption in allocbcredemptions %}
+        <tr class="border_bottom">
+            <td>{{ redemption.get_date() }}</td>
+            <td style="text-align:left;padding-left:100px;">{{ redemption.get_bank_card() }}
+                <br>
+                Card Number:{{ redemption.get_card_no() }}
+            </td>
+            <td>{{ redemption.get_full_name() }}</td>
+            <td>{{ redemption.get_qty() }}</td>
+            <td>{{ redemption.get_redeemed_pt() }}</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+            <tr class="border_bottom" id="nth">
+            <td colspan=6>
+                <div style="font-size:16px; font-weight:bold;text-align:center;">
+                    <p>You did not redeem any rewards for this month.</p>
+                </div>
+            </td>
+        </tr>
+
+    {% endif %}
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+Dine,Andersens of Denmark Voucher,$10 Voucher,600,andersenicecream.png,180,50,Andersens of Denmark $10 Voucher
+Dine,Bee Cheng Hiang Voucher,$20 Voucher,1400,beechenghiang.jpg,170,130,Bee Cheng Hiang $20 Voucher
+Dine,Ben & Jerry's Voucher,$10 Voucher,600,benandjerry.jpg,160,50,Ben & Jerry's S$10 Voucher
+Dine,Crystal Jade Restaurants Voucher,$50 Voucher,3250,crystaljade.jpg,170,80,Crystal Jade Restaurants S$50 Voucher
+Dine,Din Tai Fung Voucher,$30 Voucher,2250,dintaifung.jpg,170,80,Din Tai Fung $30 Voucher
+Dine,Polar Puffs and Cakes Voucher,$10 Voucher,800,polar.jpg,170,70,Polar Puffs and Cakes $10 Voucher
+Dine,Spinelli Voucher,$10 Voucher,700,spinelli.jpg,150,120,Spinelli S$10 Voucher
+Dine,Swensen's Voucher,$30 Voucher,2000,swensens.png,160,50,Swensen's $30 Voucher
+Leisure,Golden Village Ticket,1 Movie Ticket,800,goldenvillage.png,150,120,Golden Village 1 Movie Ticket
+Leisure,Shaw Theatre Tickets,2 Movie Ticket,1600,shawtheatres.png,150,100,Shaw Theatre 2 Movie Ticket
+Shop,Club 21 Voucher,$50 Voucher,3000,club2.jpg,80,80,Club 21 $50 Voucher
+Shop,Courts Voucher,$50 Voucher,3350,court.jpg,160,60,Courts $50 Voucher
+Shop,IKEA Voucher,$30 Voucher,1750,ikea.png,180,60,IKEA $30 Voucher
+Shop,Nike Voucher,$20 Voucher,1800,nike.png,120,90,Nike $20 Voucher
+Shop,Courts Voucher,$20 Voucher,1025,court.jpg,160,60,Courts $20 Voucher
+Shop,Takashimaya Voucher,$100 Voucher,6150,takashimaya.png,150,45,Takashimaya $100 Voucher

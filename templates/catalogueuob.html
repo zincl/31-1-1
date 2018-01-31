@@ -1,0 +1,812 @@
+{% extends 'layout.html' %}
+{% block body %}
+    {% from "includes/_formhelper.html" import render_field %}
+
+<script>
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+</script>
+
+<script>
+var tdydate;
+function date() {
+
+var date = "";
+
+var newDate = new Date();
+
+// Get the month, day, and year.
+date += newDate.getDate() + "/";
+date += (newDate.getMonth() + 1) + "/";
+date += newDate.getFullYear();
+
+return date;
+
+
+}
+/*
+function addtocart1(){
+    date= date();
+    var name = document.getElementById("name").innerText;
+    var type= document.getElementById("type").innerText;
+    var item = "Asia Mall $20 Gift Voucher";
+    var points = 1110;
+    var quantity = document.getElementById("Asia Mall $20 Gift Voucher").value;
+    var totalpoints= points * quantity;
+    asiamall= {"date": date,"rewardname":name,"type":type, "item": item, "points":points,"quantity":quantity,"totalpoints":totalpoints};
+    items.push(asiamall);
+    console.log(items)
+}
+*/
+</script>
+
+<style>
+
+    .container{
+        width:90%;
+    }
+
+    ul.nav.nav-tabs{
+        font-size:15px;
+        border-bottom: 2px solid black;
+        font-family: Calibri;
+    }
+    ul.nav.nav-tabs>.active>a{
+        border:1px solid black;
+        background-color:whitesmoke;
+        font-family: Calibri;
+    }
+    .nav-tabs>li>a{
+        margin-right:35px;
+        margin-top:4px;
+        border:1px solid black;
+        border-bottom:transparent;
+        color: black;
+        font-family: Calibri;
+    }
+    a.nav-tabs.active{
+        background-color:whitesmoke;
+        font-family: Calibri;
+    }
+    .pointsystem{
+        border-style: solid;
+        border-bottom-color: transparent;
+        font-size:15px;
+        font-weight:bold;
+        padding:3px 10px 3px 20px;
+        text-align:center;
+        display: inline-block;
+        margin-top: -9px;
+        font-family: Calibri;
+    }
+    h3{
+        font-weight:bold;
+        font-size:23px;
+        margin: 10px 35px 0px 10px;
+        font-family: Calibri;
+    }
+    span.glyphicon.glyphicon-shopping-cart{
+        color:black;
+        font-size:25px;
+        margin: -20px 25px 0px 30px;
+
+    }
+
+    .search{
+        position: relative;
+        margin:20px 0px -10px 0px;
+        font-family: Calibri;
+    }
+    input[type=search]::-webkit-search-cancel-button {
+        -webkit-appearance: searchfield-cancel-button;
+    }
+
+    i.glyphicon.glyphicon-search {
+        position: absolute;
+        padding: 10px;
+        pointer-events: none;
+    }
+
+    th.text-center {
+        border: 1px solid black;
+        font-size:18px;
+        font-family: "Century Gothic";
+    }
+
+    .info{
+        font-size:18px;
+        font-family: Calibri;
+    }
+    #name{
+    font-weight:bold;
+    }
+
+    tr.border_bottom td {
+      border-bottom:1pt solid black;
+      font-family: Calibri;
+    }
+    .addtocart{
+    background-color: white;
+    color: black;
+    border:1px solid black;
+    padding: 5px 3px;
+    margin-top:5px;
+    text-align: center;
+    width:130px;
+    font-size: 15px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-family: Calibri;
+}
+    .addtocart:hover {
+        background-color: #e7e7e7;
+    }
+
+    #myBtn {
+    display: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    width: 45px;
+	height: 45px;
+	border-radius: 50px;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    outline: none;
+    font-family: Calibri;
+
+    }
+
+</style>
+{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+		  <div class="alert alert-danger alert-dismissible" role="alert" style="text-align: center;font-size: 15px;">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+<div class="container">
+    <!-- Nav tabs with classes -->
+  <ul class="nav nav-tabs" role="tablist">
+  <li><a href=".preferred" role="tab" data-toggle="tab">Preferred</a></li>
+  <li  class="active"><a href=".all" role="tab" data-toggle="tab">All</a></li>
+  <li><a href=".retail" role="tab" data-toggle="tab">Retail</a></li>
+  <li><a href=".dining" role="tab" data-toggle="tab">Dining</a></li>
+  <li><a href=".leisure" role="tab" data-toggle="tab">Leisure</a></li>
+  <li role="presentation" class="uobbank">
+       <h3>UOB Catalogue</h3>
+      </li>
+      <li>
+          {% block uobcurrentpts %}
+          <div  class="pointsystem" >
+                <div style="display:inline-block">
+                    <p style="margin-bottom:0px;font-size:17px;">
+                        Current Point : UNI$<span id="currentpt">{{ uobcurrentpts }}</span>
+                    </p>
+                    <p style="padding-right:47px; margin-bottom:0px;  font-size:17px; ">
+                        Redeemed Point : UNI$<span id="redeempt">{{uobredeempts}}</span>
+                    </p>
+                </div>
+                <div style="display:inline-block">
+                    <p style="text-align:center; margin:0px">
+                        <a href="/cartuob"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                    </p>
+                </div>
+          </div>
+          {% endblock %}
+      </li>
+  </ul>
+
+<!-- Tab panes with classes-->
+<div class="tab-content">
+  <div class="tab-pane preferred">
+      <script>
+function searchuobPreferred() {
+    // Declare variables
+    input = document.getElementById("searchuobpreferred");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("preferred");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
+
+</script>
+      <table align="center">
+          <tr>
+              <td style="font-size:15px;font-family: Calibri;">
+                  <div class="search">
+                      <i class="glyphicon glyphicon-search"></i>
+                      <input type="search" id="searchuobpreferred" onkeyup="searchuobPreferred()"  placeholder="Search Reward names" style="width: 400px;font-size: 16px;padding: 10px 20px 12px 40px;border: 1px solid black;height: 40px;">
+                  </div>
+              </td>
+
+              <td style="text-align:center">
+
+              </td>
+          </tr>
+      </table>
+<br>
+<br>
+
+  <table class="uob" id="preferred" style="border:1px solid black;font-family: 'Century Gothic';font-size:18px; width:90%;text-align:center; margin:auto;">
+      <tr>
+          <col width="20%">
+          <col width="20%">
+          <col width="22.5%">
+          <col width="15%">
+
+
+          <th class="text-center" colspan="2">Item</th>
+          <th class="text-center">Type</th>
+          <th class="text-center">Points (UNI$)</th>
+          <th class="text-center">Selection</th>
+      </tr>
+<!--UOB PREFERRED ITEMS-->
+      {% if uobpreferreditems[0] =="no redemption made" %}
+      <tr class="border_bottom" id="insufficientpoint">
+            <td colspan=5>
+                <div style="font-size:16px; font-weight:bold;text-align:center;padding: 20px 0px">
+                    <p>You have not made any redemption.</p>
+                </div>
+            </td>
+        </tr>
+
+      {% elif uobpreferreditems %}
+      {% for preferreditems in uobpreferreditems %}
+
+      <tr class="border_bottom"  style="height:120px;">
+
+          <td class="image">
+              <p><img id="img" src="static/images/{{preferreditems.get_image()}}" width="{{ preferreditems.get_width()}}" height="{{ preferreditems.get_height()}}"></p>
+          </td>
+          <td class="info" >
+              <p id="name">{{ preferreditems.get_item()}}</p>
+          </td>
+
+          <td >
+              <p class="info" id="type">{{ preferreditems.get_type()}}</p>
+          </td>
+          <td >
+              <p class="info" id="points">{{ preferreditems.get_points()}}points</p>
+          </td>
+          <td>
+          <form method="POST" action="">
+<!-- use display:none to hide the input type  style="display:none"-->
+              <input type="text" name = "fullname"  style="display:none" value="{{ preferreditems.get_full_name()}}">
+              <input type="text" name = "point"  style="display:none" value="{{ preferreditems.get_points()}}">
+              <input type="text" name = "currentpoint"  style="display:none" value="{{ uobcurrentpts }}">
+              <input type="text" name = "redeempoint" style="display:none" value="0">
+              <p class="uobselection">
+               <label for="quantity">Quantity:</label>
+                  <select name="quantity">
+                      <option value="0" >0</option>
+                      {% for preferrednum in range(preferreditems.get_maxquantity()) %}
+                      <option value="{{ (preferrednum + 1)}}">{{ (preferrednum + 1)}}</option>
+                      {% endfor %}
+                  </select>
+              </p>
+
+              <button class="addtocart"  type="submit" value="Submit"><span class="glyphicon glyphicon-shopping-cart" style="margin:0px 6px; font-size:15px; "></span> Add to Cart</button>
+              <p id="error"></p>
+          </form>
+          </td>
+      </tr>
+            {% endfor %}
+
+
+    {% else %}
+      <tr class="border_bottom" id="insufficientpoint">
+            <td colspan=5>
+                <div style="font-size:16px; font-weight:bold;text-align:center;padding: 20px 0px">
+                    <p>You have insufficient points to redeem.</p>
+                </div>
+            </td>
+        </tr>
+    {% endif %}
+
+    </table>
+
+
+  </div>
+  <div class="tab-pane active all">
+      <script>
+function searchuobAll() {
+    // Declare variables
+    input = document.getElementById("searchuoball");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("all");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
+
+          <table align="center">
+        <tr>
+            <td style="font-size:17px;">
+                <div class="search">
+
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input type="search" id="searchuoball" onkeyup="searchuobAll()"  placeholder="Search Reward names" style="width: 400px;font-size: 16px;padding: 10px 20px 12px 40px;border: 1px solid black;height: 40px;">
+                </div>
+            </td>
+
+
+
+        </tr>
+    </table>
+  <br>
+  <br>
+  <table class="uob" id="all" style="border:1px solid black; width:90%;text-align:center; margin:auto;">
+      <tr>
+          <col width="20%">
+          <col width="20%">
+          <col width="22.5%">
+          <col width="15%">
+
+
+          <th class="text-center" colspan="2">Item</th>
+          <th class="text-center">Type</th>
+          <th class="text-center">Points (UNI$)</th>
+          <th class="text-center">Selection</th>
+      </tr>
+<!--UOB ALL ITEMS-->
+  {% if uoballitems %}
+      {% for allitems in uoballitems %}
+
+      <tr class="border_bottom"  style="height:120px;">
+          <td class="image">
+              <p><img id="img" src="static/images/{{allitems.get_image()}}" width="{{ allitems.get_width()}}" height="{{ allitems.get_height()}}"></p>
+          </td>
+          <td class="info" >
+              <p id="name">{{ allitems.get_item()}}</p>
+          </td>
+
+          <td >
+              <p class="info" id="type">{{ allitems.get_type()}}</p>
+          </td>
+          <td >
+              <p class="info" id="points">{{ allitems.get_points()}}points</p>
+          </td>
+          <td>
+          <form method="POST" action="">
+<!-- use display:none to hide the input type  style="display:none"-->
+              <input type="text" name = "fullname" style="display:none" value="{{ allitems.get_full_name()}}">
+              <input type="text" name = "point" style="display:none" value="{{ allitems.get_points()}}">
+              <input type="text" name = "currentpoint" style="display:none" value="{{ uobcurrentpts }}">
+              <input type="text" name = "redeempoint" style="display:none" value="0">
+
+               <p class="uobselection">
+               <label for="quantity">Quantity:</label>
+                  <select name="quantity">
+                      <option value="0" >0</option>
+                      {% for allnum in range(allitems.get_maxquantity()) %}
+                      <option value="{{ (allnum + 1)}}">{{ (allnum + 1)}}</option>
+                      {% endfor %}
+                  </select>
+              </p>
+             <button class="addtocart"  type="submit" value="Submit"><span class="glyphicon glyphicon-shopping-cart" style="margin:0px 6px; font-size:15px; "></span> Add to Cart</button>
+            </form>
+          </td>
+      </tr>
+         {% endfor %}
+    {% else %}
+            <tr class="border_bottom" id="insufficientpoint">
+            <td colspan=5>
+                <div style="font-size:16px; font-weight:bold;text-align:center;padding: 20px 0px">
+                    <p>You have insufficient points to redeem.</p>
+                </div>
+            </td>
+        </tr>
+    {% endif %}
+
+    </table>
+    <button onclick="topFunction()" type="button" id="myBtn" title="Back to top"><span class="glyphicon glyphicon-chevron-up"></span></button>
+<br>
+<br>
+<br>
+
+
+  </div>
+  <div class="tab-pane retail">
+
+<script>
+function searchuobRetail() {
+    // Declare variables
+    input = document.getElementById("searchuobretail");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("retail");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
+      <table align="center">
+          <tr>
+              <td style="font-size:17px;">
+                  <div class="search">
+                      <i class="glyphicon glyphicon-search"></i>
+                      <input type="search" id="searchuobretail" onkeyup="searchuobRetail()"  placeholder="Search Reward names" style="width: 400px;font-size: 16px;padding: 10px 20px 12px 40px;border: 1px solid black;height: 40px;">
+                  </div>
+              </td>
+
+
+          </tr>
+      </table>
+
+  <br>
+  <br>
+  <table class="uob" id="retail" style="border:1px solid black; width:90%;text-align:center; margin:auto;">
+      <tr>
+          <col width="20%">
+          <col width="20%">
+          <col width="22.5%">
+          <col width="15%">
+
+
+          <th class="text-center" colspan="2">Item</th>
+          <th class="text-center">Type</th>
+          <th class="text-center">Points (UNI$)</th>
+          <th class="text-center">Selection</th>
+      </tr>
+<!--UOB RETAIL ITEMS-->
+  {% if uobretialitems %}
+      {% for retailitems in uobretialitems %}
+
+      <tr class="border_bottom"  style="height:120px;">
+          <td class="image">
+              <p><img id="img" src="static/images/{{retailitems.get_image()}}" width="{{ retailitems.get_width()}}" height="{{ retailitems.get_height()}}"></p>
+          </td>
+          <td class="info" >
+              <p id="name">{{ retailitems.get_item()}}</p>
+          </td>
+
+          <td >
+              <p class="info" id="type">{{ retailitems.get_type()}}</p>
+          </td>
+          <td >
+              <p class="info" id="points">{{ retailitems.get_points()}}points</p>
+          </td>
+          <td>
+          <form method="POST" action="">
+<!-- use display:none to hide the input type  style="display:none"-->
+              <input type="text" name = "fullname" style="display:none" value="{{ retailitems.get_full_name()}}">
+              <input type="text" name = "point" style="display:none" value="{{ retailitems.get_points()}}">
+              <input type="text" name = "currentpoint" style="display:none" value="{{ uobcurrentpts }}">
+              <input type="text" name = "redeempoint" style="display:none" value="0">
+              <p class="uobselection">
+               <label for="quantity">Quantity:</label>
+                  <select name="quantity">
+                      <option value="0" >0</option>
+                      {% for retailnum in range(retailitems.get_maxquantity()) %}
+                      <option value="{{ (retailnum + 1)}}">{{ (retailnum + 1)}}</option>
+                      {% endfor %}
+                  </select>
+              </p>
+              <button class="addtocart" type="submit" value="submit"><span class="glyphicon glyphicon-shopping-cart" style="margin:0px 6px; font-size:15px; "></span> Add to Cart</button>
+          </form>
+          </td>
+      </tr>
+
+{% endfor %}
+
+  {% else %}
+      <tr class="border_bottom" id="insufficientpoint">
+            <td colspan=5>
+                <div style="font-size:16px; font-weight:bold;text-align:center;padding: 20px 0px">
+                    <p>You have insufficient points to redeem.</p>
+                </div>
+            </td>
+        </tr>
+    {% endif %}
+    </table>
+   <br>
+<br>
+<br>
+
+</div>
+
+
+  <div class="tab-pane dining">
+
+
+<script>
+function searchuobDining() {
+    // Declare variables
+    input = document.getElementById("searchuobdining");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("dining");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
+
+      <table align="center">
+          <tr>
+              <td style="font-size:17px;">
+                  <div class="search">
+                      <i class="glyphicon glyphicon-search"></i>
+                      <input type="search" id="searchuobdining" onkeyup="searchuobDining()"  placeholder="Search Reward names" style="width: 400px;font-size: 16px;padding: 10px 20px 12px 40px;border: 1px solid black;height: 40px;">
+                  </div>
+              </td>
+
+          </tr>
+      </table>
+      <br>
+      <br>
+      <table class="uob" id="dining" style="border:1px solid black; width:90%;text-align:center; margin:auto;">
+
+          <tr>
+              <col width="20%">
+              <col width="20%">
+              <col width="22.5%">
+              <col width="15%">
+
+
+              <th class="text-center" colspan="2">Item</th>
+              <th class="text-center">Type</th>
+              <th class="text-center">Points (UNI$)</th>
+              <th class="text-center">Selection</th>
+          </tr>
+<!--UOB DINING ITEMS-->
+    {% if uobdiningitems %}
+      {% for diningitems in uobdiningitems %}
+
+          <tr class="border_bottom"  style="height:120px;">
+              <td class="image">
+                  <p><img src="static/images/{{diningitems.get_image()}}" width="{{diningitems.get_width()}}" height="{{diningitems.get_height()}}"></p>
+              </td>
+              <td class="info" id="name">
+                  <p>{{diningitems.get_item()}}</p>
+              </td>
+              <td >
+                  <p class="info" id="type">{{ diningitems.get_type()}}</p>
+              </td>
+              <td >
+                  <p class="info" id="points">{{ diningitems.get_points()}} points</p>
+              </td>
+              <td>
+              <form method="POST" action="">
+<!-- use display:none to hide the input type  style="display:none"-->
+              <input type="text" name = "fullname" style="display:none" value="{{ diningitems.get_full_name()}}">
+              <input type="text" name = "point" style="display:none" value="{{ diningitems.get_points()}}">
+              <input type="text" name = "currentpoint" style="display:none" value="{{ uobcurrentpts }}">
+              <input type="text" name = "redeempoint" style="display:none"  value="0">
+              <p class="uobselection">
+               <label for="quantity">Quantity:</label>
+                  <select name="quantity">
+                      <option value="0" >0</option>
+                      {% for diningnum in range(diningitems.get_maxquantity()) %}
+                      <option value="{{ (diningnum + 1)}}">{{ (diningnum + 1)}}</option>
+                      {% endfor %}
+                  </select>
+              </p>
+                  <button class="addtocart" type="submit" value="submit"><span class="glyphicon glyphicon-shopping-cart" style="margin:0px 6px; font-size:15px; "></span> Add to Cart</button>
+              </form>
+              </td>
+          </tr>
+      {% endfor %}
+
+    {% else %}
+      <tr class="border_bottom" id="insufficientpoint">
+            <td colspan=5>
+                <div style="font-size:16px; font-weight:bold;text-align:center;padding: 20px 0px">
+                    <p>You have insufficient points to redeem.</p>
+                </div>
+            </td>
+        </tr>
+    {% endif %}
+
+      </table>
+<br>
+<br>
+<br>
+  </div>
+
+
+  <div class="tab-pane leisure">
+
+
+<script>
+function searchuobLeisure() {
+
+    // Declare variables
+    input = document.getElementById("searchuobleisure");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("leisure");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+
+ //   if (tr.style=="none"):
+   //     search_error = document.getElementById("leisure_searcherror")
+//<td colspan="5" style="font-size: 20px; font-weight: bold; padding: 100px 0px;">Your item cannot be found.</td>
+}
+</script>
+
+      <table align="center">
+        <tr>
+            <td style="font-size:17px;">
+                <div class="search">
+
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input type="search" id="searchuobleisure" onkeyup="searchuobLeisure()"  placeholder="Search Reward names" style="width: 400px;font-size: 16px;padding: 10px 20px 12px 40px;border: 1px solid black;height: 40px;">
+                </div>
+            </td>
+
+
+
+        </tr>
+    </table>
+
+
+    <br>
+    <br>
+    <table class="uob" id="leisure" style="border:1px solid black; width:90%;text-align:center; margin:auto;">
+
+        <tr>
+            <col width="20%">
+            <col width="20%">
+            <col width="22.5%">
+            <col width="15%">
+
+
+            <th class="text-center" colspan="2">Item</th>
+            <th class="text-center">Type</th>
+            <th class="text-center">Points (UNI$)</th>
+            <th class="text-center">Selection</th>
+        </tr>
+<!--UOB LEISURE ITEMS-->
+    <tr id="leisure_searcherror"></tr>
+    {% if uobleisureitems %}
+        {% for leisureitems in uobleisureitems %}
+<!--         <script>
+                    console.log("{{ leisureitems.get_item()}}")
+                    if("{{ leisureitems.get_item()}}" == "BBounce Studio Voucher"){
+                        img=document.getElementById('image').src='static/images/bbounce.png';
+
+                    }
+
+                    else if("{{ leisureitems.get_item()}}" == "Freeing SG Voucher"){
+                        document.getElementById('image').src='static/images/freeingsg.png';
+                    }
+                    else if("{{ leisureitems.get_item()}}" == "Saint Games Voucher"){
+                        document.getElementById('image').src='static/images/saintgames.jpg';
+                    }
+                </script>
+-->
+        <tr class="border_bottom"  style="height:120px;">
+
+           <td class="image">
+                <p><img id="image" src="static/images/{{ leisureitems.get_image()}}" width="{{ leisureitems.get_width()}}" height="{{ leisureitems.get_height()}}"></p>
+            </td>
+            <td class="info" >
+                <p id="lname">{{ leisureitems.get_item()}}</p>
+            </td>
+
+            <td >
+                <p class="info" id="type">{{ leisureitems.get_type()}}</p>
+            </td>
+            <td >
+                <p class="info" id="points">{{ leisureitems.get_points()}} points</p>
+            </td>
+            <td>
+            <form method="POST" action="">
+<!-- use display:none to hide the input type  style="display:none"-->
+              <input type="text" name = "fullname" style="display:none" value="{{ leisureitems.get_full_name()}}">
+              <input type="text" name = "point" style="display:none" value="{{ leisureitems.get_points()}}">
+              <input type="text" name = "currentpoint" style="display:none" value="{{ uobcurrentpts }}">
+              <input type="text" name = "redeempoint" style="display:none" value="0">
+              <p class="uobselection">
+               <label for="quantity">Quantity:</label>
+                  <select name="quantity">
+                      <option value="0" >0</option>
+                      {% for leisurenum in range(leisureitems.get_maxquantity()) %}
+                      <option value="{{ (leisurenum + 1)}}">{{ (leisurenum + 1)}}</option>
+                      {% endfor %}
+                  </select>
+              </p>
+                <button class="addtocart" type="submit" value="submit"><span class="glyphicon glyphicon-shopping-cart" style="margin:0px 6px; font-size:15px; "></span> Add to Cart</button>
+            </form>
+           </td>
+        </tr>
+
+        {% endfor %}
+    {% else %}
+      <tr class="border_bottom" id="insufficientpoint">
+            <td colspan=5>
+                <div style="font-size:16px; font-weight:bold;text-align:center;padding: 20px 0px">
+                    <p>You have insufficient points to redeem.</p>
+                </div>
+            </td>
+        </tr>
+    {% endif %}
+
+    </table>
+
+<br>
+<br>
+<br>
+<br>
+
+<br>
+
+
+</div>
+</div>
+
+</div><!--container-->
+{% endblock %}

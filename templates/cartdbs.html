@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+tr.border_bottom td {
+    border-bottom:1pt solid black;
+    height:100px;
+}
+tr{
+    font-size:17px;
+}
+
+th.text-center {
+    border: 1px solid black;
+    font-size:15px;
+    font-family: "Century Gothic";
+}
+#removebtn{
+    background-color:transparent;
+    outline:none;
+    border:none;
+    width:10px;
+    height:10px;
+}
+</style>
+<script>
+function areyousure(){
+		var sure=confirm("Are you sure?");
+		if (sure == true){
+		alert("You have successfully redeemed your rewards");
+
+		}
+}
+
+</script>
+<h1 style="text-align:center; font-size: 23px; font-family: 'Century Gothic'">Checkout Summary</h1>
+<br>
+    <table class="summary" id="summary" style="border:1px solid black; width:90%;text-align:center; margin:auto;height:160px;">
+    <tr>
+
+            <th class="text-center" colspan=2>Reward Item</th>
+            <th class="text-center">Points</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Total Points</th>
+    </tr>
+    {% if dbscheckout %}
+    {% for checkoutitems in dbscheckout %}
+    <tr class="border_bottom" id="cartitem">
+    <form method='POST'>
+        <!--value = position of the list-->
+        <td><button type="submit" name="remove" id="removebtn" value="{{ checkoutitems.get_position()}}"><span class="glyphicon glyphicon-remove"></span></button></td>
+        <td>
+            <img src="static/images/{{checkoutitems.get_image()}}" width="{{ checkoutitems.get_width()}}" height="{{ checkoutitems.get_height() }}" style="display:inline-block;margin-left: -90px; margin-right:50px;:">
+            <p style="display:inline-block">{{checkoutitems.get_full_name()}}</p>
+        </td>
+        <td id="points">{{checkoutitems.get_points()}}</td>
+        <td id="cartqty">{{checkoutitems.get_quantity()}}</td>
+
+        <td><span id="cartpointsredeemed">{{checkoutitems.get_totalpoints()}}</span> points</td>
+
+    </form>
+    </tr>
+    {% endfor %}
+
+    <tr class="border_bottom">
+        <td colspan=5><span style="float:right;margin-right:55px;">Subtotal: <span id="subtotal">{{dbscheckoutpts }}</span> DBS Points</span></td>
+
+    </tr>
+    {% else %}
+    <tr class="border_bottom" id="insufficientpoint">
+        <td colspan=5>
+            <div style="font-size:16px; font-weight:bold;text-align:center;padding: 20px 0px">
+                <p>Your Cart is Empty.</p>
+            </div>
+        </td>
+        </tr>
+    {% endif %}
+
+</table>
+
+    {% if dbscheckout %}
+        {% if session.cart %}
+
+    <br>
+    <div class="row">
+		<div class="col-md-12"/>
+		<div align="center">
+			  <a href="/cataloguedbs"  id="buttoncolor" class="btn btn-default" role="button" style="font-size:18px; width:90px; font-weight:bold; margin-right:50px; font-family: Calibri">Back</a>
+
+                <a href= "/addtoredemptiondbs">
+                    <button type="submit" value="Submit" name="addtocart" id="buttoncolor" class="btn btn-default" onclick="areyousure()" style="font-size:18px; width:100px; font-weight:bold;font-family: Calibri"><span class=" glyphicon glyphicon-ok" style="color:green"></span> Confirm
+                    </button>
+                </a>
+
+        </div>
+		</div>
+        {% endif %}
+
+    </table>
+
+    {% else %}
+    <br>
+    <div class="row">
+		<div class="col-md-12"/>
+		<div align="center">
+			  <a href="/cataloguedbs"  id="buttoncolor" class="btn btn-default" role="button" style="font-size:15px; width:90px; font-weight:bold; margin-right:50px; font-family: Calibri">Back</a>
+			  <button type="button" disabled id="buttoncolor" class="btn btn-default" type="submit" value="submit" style="font-size:15px; width:100px; font-weight:bold;font-family: Calibri"><span class=" glyphicon glyphicon-ok" style="color:green"></span> Confirm</button>
+		</div>
+		</div>
+    </table>
+
+{% endif %}
+{% endblock %}
+<!-- Proceed to checkout-->
